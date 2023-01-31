@@ -2,9 +2,35 @@ import { Request, Response, NextFunction } from 'express';
 import User from "../models/User";
 import UserRepository from '../repositories/UserRepository';
 import jwt from 'jsonwebtoken'
+import isEmail from 'validator/lib/isEmail';
 
 async function postUser(req: Request, res: Response) {
     const user = req.body as User;
+
+    if(!user.email || !user.password || !user.username){
+        return res.status(401).json({
+            errors:['Inputs are invalid.']
+        })
+    }
+
+    if(user.password.length < 6){
+        return res.status(401).json({
+            errors:['Password needs more than 6 car.']
+        })
+    }
+
+    if(user.username.length < 5){
+        return res.status(401).json({
+            errors:['Username needs more than 6 car.']
+        })
+    }
+
+    if(!isEmail(user.email)){
+        return res.status(401).json({
+            errors:['Email invalid.']
+        })
+    }
+
     const result = await UserRepository.registerUser(user);
     if (result)
         res.status(201).json(result);

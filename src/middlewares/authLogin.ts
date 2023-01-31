@@ -26,7 +26,6 @@ export async function authLogin(req: Request, res:Response, next: NextFunction) 
     const data = jwt.verify(token, "iasdojdasjdaij");
 
     const email = (data as JWTData).email;
-    const id = (data as JWTData).id;
 
     const user  = await UserRepository.findOne(email);
 

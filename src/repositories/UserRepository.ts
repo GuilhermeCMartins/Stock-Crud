@@ -4,10 +4,6 @@ const users: User[] = [];
 
 async function registerUser(user: User): Promise<User>{
     return new Promise ((resolve, reject) => {
-        if(!user.email || !user.password || !user.username){
-            return reject("All fields are needed.")
-        }
-
         const newUser = new User(user.username, user.password,user.email )
         users.push(newUser);
         
@@ -62,6 +58,7 @@ async function findOne(email: string): Promise<User | undefined> {
         return resolve(users.find(e => e.email === email));
     })
 }
+
 
 
 export default {

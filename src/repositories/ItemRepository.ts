@@ -1,3 +1,4 @@
+import User from 'src/models/User';
 import Item from '../models/Item';
  
 const items: Item[] = [];
@@ -14,11 +15,11 @@ async function getItems(): Promise<Item[]> {
     })
 }
 
-async function addItem(item: Item): Promise<Item> {
+async function addItem(item: Item, user: string): Promise<Item> {
     return new Promise((resolve, reject) => {
-        if (!item.name || !item.price || !item.quantity)  return reject(new Error(`Invalid item.`));
+        if (!item.name || !item.price || !item.quantity || !user)  return reject(new Error(`Invalid item.`));
  
-        const newItem = new Item(item.name, item.price, item.quantity);
+        const newItem = new Item(item.name, item.price, item.quantity, user);
         items.push(newItem);
  
         return resolve(newItem);
