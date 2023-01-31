@@ -7,7 +7,7 @@ import UserRepository from '../repositories/UserRepository';
 export async function authLogin(req: Request, res:Response, next: NextFunction) {
     interface JWTData {
         email: string;
-        id: string;
+        id: number;
     }
     
     const { authorization } = req.headers;
