@@ -5,15 +5,15 @@ export default class Item {
     name: string;
     price: number;
     quantity: number;
-    username: string;
+    register_by: string;
  
     private static nextId = 1;
  
-    constructor(name: string, price: number, quantity: number, username: string) {
+    constructor(name: string, price: number, quantity: number, register_by: string) {
         this.id = Item.nextId++;
         this.name = name;
         this.price = price;
-        this.username = username;
+        this.register_by = register_by;
         this.quantity = quantity;
     }
 }

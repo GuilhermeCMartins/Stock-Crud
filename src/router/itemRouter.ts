@@ -4,14 +4,14 @@ import { authLogin } from '../middlewares/authLogin'
 
 const router = express.Router();
 
-router.get('/:id', itemController.getItem);
+router.get('/:id',authLogin, itemController.getItem);
 
-router.get('/', itemController.getItems);
+router.get('/',authLogin, itemController.getItems);
 
 router.post('/', authLogin ,  itemController.postItem);
 
-router.patch('/:id', itemController.patchItem);
+router.patch('/:id',authLogin, itemController.patchItem);
 
-router.delete('/:id', itemController.deleteItem);
+router.delete('/:id',authLogin, itemController.deleteItem);
 
 export default router;

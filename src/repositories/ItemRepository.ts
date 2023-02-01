@@ -15,11 +15,16 @@ async function getItems(): Promise<Item[]> {
     })
 }
 
-async function addItem(item: Item, user: string): Promise<Item> {
-    return new Promise((resolve, reject) => {
-        if (!item.name || !item.price || !item.quantity || !user)  return reject(new Error(`Invalid item.`));
- 
+async function addItem(item: Item, user: string): Promise<Item | string> {
+    return new Promise((resolve, reject) => {         
         const newItem = new Item(item.name, item.price, item.quantity, user);
+
+        const pos = items.map(e => e.name).indexOf(item.name);
+
+        if(pos !== -1){
+            return reject("Item already exists, you can update value and quantity with id:" + (pos + 1));
+        }
+
         items.push(newItem);
  
         return resolve(newItem);
@@ -38,6 +43,10 @@ async function updateItem(id: number, newItem: Item): Promise<Item | undefined> 
             
             if(newItem.quantity && items[index].quantity !== newItem.quantity)
                 items[index].quantity = newItem.quantity;
+
+            if(newItem.register_by && items[index].register_by !== newItem.register_by)
+                items[index].register_by = newItem.register_by;
+                
             return resolve(items[index]);
         }
  

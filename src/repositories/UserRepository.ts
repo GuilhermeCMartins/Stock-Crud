@@ -2,13 +2,21 @@ import User from "../models/User";
 
 const users: User[] = [];
 
-async function registerUser(user: User): Promise<User>{
+async function registerUser(user: User): Promise<User | string>{
     return new Promise ((resolve, reject) => {
-        const newUser = new User(user.username, user.password,user.email )
+        const pos = users.map(e => e.email).indexOf(user.email);
+
+        if(pos !== -1){
+            return reject("Email already exists.");
+        }
+
+        const newUser = new User(user.username, user.password,user.email)
+
         users.push(newUser);
         
         return resolve(newUser);
-})
+
+    })
 }
 
 async function deleteUser(id:number): Promise<boolean>{

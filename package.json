@@ -32,6 +32,8 @@
     "@types/validator": "^13.7.11",
     "axios": "^1.2.4",
     "express": "^4.18.2",
+    "flatted": "^3.2.7",
+    "jsonc": "^2.0.0",
     "jsonwebtoken": "^9.0.0",
     "jwt-simple": "^0.5.6",
     "mongoose": "^5.13.15",
