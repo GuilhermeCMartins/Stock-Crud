@@ -6,7 +6,7 @@ Aplicativo feito em node.js (express) com typescript.
 
 1. instale as dependencias
 ```
-yarn || npm i
+npm i
 
 ```
 
